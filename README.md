@@ -8,4 +8,6 @@
 
 * 1-insertion_sort_list.c: insertion sort implementation on doubly-linked lists
 
+* 2-selection_sort.c: implements selection sort on arrays.
+
 
