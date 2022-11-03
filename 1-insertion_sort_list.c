@@ -1,5 +1,7 @@
 #include "sort.h"
 
+void insert_middle(listint_t **tmp_next, listint_t *tmp_prev, listint_t *nxt);
+
 
 /**
  * insertion_sort_list - sorts a doubly-linked list using insertion sort.
@@ -35,11 +37,7 @@ void insertion_sort_list(listint_t **list)
 			{
 				if (tmp_next->n >= tmp_prev->n)
 				{
-					tmp_next->next = tmp_prev->next;
-					tmp_next->prev = tmp_prev;
-					tmp_prev->next = tmp_next;
-					tmp_next->next->prev = tmp_next;
-					tmp_next = next_node;
+					insert_middle(&tmp_next, tmp_prev, next_node);
 					print_list(*list);
 					insert_start = 0;
 					break;
@@ -72,4 +70,24 @@ void insertion_sort_list(listint_t **list)
 		}
 		insert_start = 1;
 	}
+}
+
+
+
+
+/**
+ * insert_middle - inserts a node inside a doubly-linked list.
+ * @tmp_next: address of pointer to the listint_t node to insert.
+ * @tmp_prev: pointer to node to insert @tmp_next in front of.
+ * @nxt: the node to continue insertion sort from.
+ *
+ * Note: this is a helper function to insertion_sort_list().
+ */
+void insert_middle(listint_t **tmp_next, listint_t *tmp_prev, listint_t *nxt)
+{
+	(*tmp_next)->next = tmp_prev->next;
+	(*tmp_next)->prev = tmp_prev;
+	tmp_prev->next = *tmp_next;
+	(*tmp_next)->next->prev = *tmp_next;
+	*tmp_next = nxt;
 }
