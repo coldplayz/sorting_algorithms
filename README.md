@@ -6,4 +6,6 @@
 
 * 0-bubble_sort.c: implements the bubble sort algorithm.
 
+* 1-insertion_sort_list.c: insertion sort implementation on doubly-linked lists
+
 
