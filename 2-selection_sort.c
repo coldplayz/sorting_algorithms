@@ -10,24 +10,24 @@
 
 void selection_sort(int *array, size_t size)
 {
-    size_t min, i, j;
+	size_t min, i, j;
 
-    for (i = 0; i < size - 1; i++)
-    {
-        min = i;
-        /* Compare min to other values in the array*/
-        /* Reset min to any value lower than min*/
-        for(j = i + 1; j < size; j++)
-        {
-            if (array[j] < array[min])
-                min = j;
-        }
-        /* Check if there is a new min */
-        /* if yes, then swap */
-        if (min != i)
-        {
-            swap(&array[min], &array[i]);
-            print_array(array, size);
-        }
-    }
+	for (i = 0; i < size - 1; i++)
+	{
+		min = i;
+		/* Compare min to other values in the array*/
+		/* Reset min to any value lower than min*/
+		for(j = i + 1; j < size; j++)
+		{
+			if (array[j] < array[min])
+				min = j;
+		}
+		/* Check if there is a new min */
+		/* if yes, then swap */
+		if (min != i)
+		{
+			swap(&array[min], &array[i]);
+			print_array(array, size);
+		}
+	}
 }
