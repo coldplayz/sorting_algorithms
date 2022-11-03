@@ -1,9 +1,9 @@
 #include "sort.h"
 
-/*
+/**
  * swap - swaps to integers
- * @: First integer
- * @: Second integer
+ * @a: First integer
+ * @b: Second integer
  * Return: Nothing
  */
 void swap(int *a, int *b)
