@@ -10,6 +10,9 @@
 
 * 2-selection_sort.c: implements selection sort on arrays.
 
-* 3-quick_sort.c: implements Lomuto-partition quick sort.
+* 3-quick_sort.c: implements Lomuto-partition Quick Sort.
+
+
+* 100-shell_sort.c: implements Shell Sort using the Knuth sequence.
 
 
