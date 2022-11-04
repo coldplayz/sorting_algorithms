@@ -36,6 +36,7 @@ void shell_sort(int *array, size_t size)
 				sort_stream(start_a, array + j, array, size, gaps[i]);
 			}
 		}
+		print_array(array, size);
 	}
 }
 
@@ -58,6 +59,8 @@ void sort_stream(
 {
 	int tmp_v, *prev_stream;
 
+	(void)size;
+	(void)array;
 	prev_stream = curr_stream - gap; /* initialize prev_stream */
 	for (; curr_stream != start_a;)
 	{
@@ -74,7 +77,6 @@ void sort_stream(
 		if (curr_stream == start_a)
 		{
 			/* Start of array; return to avoid assigning illegal address to prev_str */
-			print_array(array, size);
 			return;
 		}
 		prev_stream = prev_stream - gap;
