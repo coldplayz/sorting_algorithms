@@ -12,7 +12,7 @@ void insertion_sort_list(listint_t **list)
 	listint_t *next_node, *tmp_next, *tmp_prev, *tmp_prev_bkup = NULL;
 	int insert_start = 1;
 
-	if (*list == NULL || (*list)->next == NULL)
+	if (!list || *list == NULL || (*list)->next == NULL)
 	{
 		/* Empty or single-element list */
 		return;
