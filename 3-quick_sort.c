@@ -13,7 +13,7 @@ void quick_sort(int *array, size_t size)
 {
 	int *low_a, *high_a;
 
-	if (size < 2)
+	if (size < 2 || !array)
 	{
 		return;
 	}
@@ -28,7 +28,7 @@ void quick_sort(int *array, size_t size)
 
 
 /**
- * lomuto_sort - implements Lamuto partitioning and sort.
+ * lomuto_sort - implements Lomuto partitioning and sort.
  * @array: array of integers being sorted.
  * @size: size of @array.
  * @low_a: start address of the (sub-)array to partition and sort.

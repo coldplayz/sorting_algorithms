@@ -13,7 +13,7 @@ void shell_sort(int *array, size_t size)
 	int i, k, *start_a, gaps[] = {4, 1, 0};
 	size_t j;
 
-	if (size < 2)
+	if (size < 2 || !array)
 	{
 		return;
 	}
