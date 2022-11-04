@@ -10,4 +10,6 @@
 
 * 2-selection_sort.c: implements selection sort on arrays.
 
+* 3-quick_sort.c: implements Lomuto-partition quick sort.
+
 
