@@ -15,4 +15,6 @@
 
 * 100-shell_sort.c: implements Shell Sort using the Knuth sequence.
 
+* 101-cocktail_sort_list.c: implements Cocktail Shaker Sort.
+
 
