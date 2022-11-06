@@ -10,7 +10,7 @@
  */
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *insertionPointer, *current, *tmp;
+	listint_t *insertionPointer, *current;
 
 	insertionPointer = *list;
 	current = *list;
@@ -22,17 +22,17 @@ void insertion_sort_list(listint_t **list)
 		{
 			if (insertionPointer->n > current->n)
 			{
-				tmp = current->next;
-				current->next = insertionPointer;
+				insertionPointer->prev->next = current;
+				insertionPointer->next = current->next;
+				insertionPointer->prev = current;
 				current->next->prev = insertionPointer;
 				current->prev = insertionPointer->prev;
-				insertionPointer->next = tmp;
-				insertionPointer->prev = current;
+				current->next = insertionPointer;
 			}
 			else
 				insertionPointer = insertionPointer->next;
 		}
-		printf("%d\n", insertionPointer->n);
+		print_list(*list);
 		current = current->next;
 	}
 }
