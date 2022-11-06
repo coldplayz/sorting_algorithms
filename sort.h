@@ -31,7 +31,7 @@ void counting_sort(int *array, size_t size);
 
 /* others */
 void cocktail_sort(int *array, size_t size);
-void *calloc2(size_t size);
+void *allocate(size_t size);
 
 
 

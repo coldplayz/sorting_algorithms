@@ -17,12 +17,12 @@ void counting_sort(int *array, size_t size)
 	}
 
 	max = int_array_max(array, size);
-	count = calloc2(sizeof(int) * (max + 1));
+	count = allocate(sizeof(int) * (max + 1));
 	if (!count)
 	{
 		return;
 	}
-	output = calloc2(sizeof(int) * size);
+	output = allocate(sizeof(int) * size);
 	if (!output)
 	{
 		return;
@@ -89,13 +89,13 @@ int int_array_max(int *array, size_t size)
 
 
 /**
- * calloc2 - allocates and initializes memory of @size bytes.
+ * allocate - allocates and initializes memory of @size bytes.
  * @size: the number of contiguous bytes to allocate.
  *
  * Note: bytes are currently initialized to zero.
  * Return: a void pointer representing the address of the allocated space.
  */
-void *calloc2(size_t size)
+void *allocate(size_t size)
 {
 	void *ptr;
 	char *ptc;
