@@ -1,39 +1,47 @@
 #include "sort.h"
 
+/**
+ * swap - swaps to integers
+ * @a: First integer
+ * @b: Second integer
+ * Return: Nothing
+ */
+void swap(int *a, int *b)
+{
+	int tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
 
 /**
- * selection_sort - implements the selection sort algorithm.
- * @array: array to sort.
- * @size: size of the @array.
+ * selection_sort - Sorts a given array in ascending order using
+ * selection sort algorithm
+ * @array: Array to be sorted
+ * @size: Size of array
+ * Return: Nothing
  */
+
 void selection_sort(int *array, size_t size)
 {
-	size_t i, j;
-	int tmp, min, min_idx;
-
-	if (size < 2)
-	{
-		return;
-	}
+	size_t min, i, j;
 
 	for (i = 0; i < size - 1; i++)
 	{
-		min = array[i];
+		min = i;
+		/* Compare min to other values in the array*/
+		/* Reset min to any value lower than min*/
 		for (j = i + 1; j < size; j++)
 		{
-			if (array[j] < min)
-			{
-				/* Update minimum value, and its index in array */
-				min = array[j];
-				min_idx = j;
-			}
+			if (array[j] < array[min])
+				min = j;
 		}
-		/* Swap if current min is not same as first min */
-		if (min != array[i])
+		/* Check if there is a new min */
+		/* if yes, then swap */
+		if (min != i)
 		{
-			tmp = array[min_idx];
-			array[min_idx] = array[i];
-			array[i] = tmp;
+			swap(&array[min], &array[i]);
 			print_array(array, size);
 		}
 	}
