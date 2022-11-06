@@ -104,7 +104,6 @@ void *allocate(size_t size)
 	ptr = malloc(size);
 	if (!ptr)
 	{
-		perror("calloc2");
 		return (NULL);
 	}
 
