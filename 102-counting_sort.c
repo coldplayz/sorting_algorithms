@@ -32,7 +32,7 @@ void counting_sort(int *array, size_t size)
 	for (i = 0; i < (int)size; i++)
 	{
 		key = array[i]; /* get the integer at the array index as key */
-		count[key] = ++count[key]; /* increment the count for key */
+		count[key] = count[key] + 1; /* increment the count for key */
 	}
 
 	/* Convert the counts to cumulative counts by prefix sum */
