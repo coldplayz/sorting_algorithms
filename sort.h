@@ -26,4 +26,8 @@ void quick_sort(int *array, size_t size);
 int partition(int *array, int lo, int hi);
 void quick_sort_(int *array, int lo, int hi);
 void shell_sort(int *array, size_t size);
+void merge_sort_(int *array, int lb, int ub);
+void merge_sort(int *array, size_t size);
+void merge(int *array, int lb, int mid, int ub);
+
 #endif
