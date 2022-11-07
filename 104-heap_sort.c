@@ -1,8 +1,12 @@
 #include "sort.h"
 
+void heapify(int *array, int size, int size0, int start_idx);
 
-
-
+/**
+ * heap_sort - sorts an array using heap sort implementation.
+ * @array: the array to sort.
+ * @size: size of @array.
+ */
 void heap_sort(int *array, size_t size)
 {
 	int i;
@@ -13,15 +17,33 @@ void heap_sort(int *array, size_t size)
 		return;
 	}
 
+	/* printf("%da\n", a++); */
 	/* Heapify @array into a max-heap representation */
-	for (i = n / 2 - 1; i < size; i--)
+	for (i = size / 2 - 1; i >= 0; i--)
 	{
-		heapify(array, size, i);
+		/* printf("%dai\n", a++); */
+		heapify(array, size, size, i);
 	}
 
-	/* Swap first and last idx values of array, representing */
-	/* the root and last nodes of the abstract heap. */
-	swap(array[0], array[size - 1]);
+	/* printf("%db\n", a++); */
+	/* Move the highest value to the end of array, reduce heap, heapify, repeat */
+	while (1)
+	{
+		/* Swap first and last idx values of array, representing */
+		/* the root and last nodes of the abstract heap. */
+		swap(array + 0, array + (size_cpy - 1));
+		print_array(array, size);
+
+		/* Reduce size of array to effectively delete the last heap node */
+		size_cpy--;
+		if (size_cpy == 1)
+		{
+			return; /* sorting done */
+		}
+
+		heapify(array, size_cpy, size, 0); /* heapify, starting from the root */
+	}
+	/* printf("%dc\n", a++); */
 }
 
 
@@ -29,11 +51,12 @@ void heap_sort(int *array, size_t size)
  * heapify - converts @array into a max-heap representation.
  * @array: array to convert into a max heap.
  * @size: size of array.
+ * @size0: size of the original array.
  * @start_idx: index of the node to start heapification from.
  */
-void heapify(int *array, int size, int start_idx)
+void heapify(int *array, int size, int size0, int start_idx)
 {
-	int largest_idx, left_child_idx, right_child_idx;
+	int largest, left_child_idx, right_child_idx;
 
 	/* Compute parent and children indices */
 	largest = start_idx;
@@ -53,7 +76,8 @@ void heapify(int *array, int size, int start_idx)
 	{
 		/* Swapping must occur between parent and largest node */
 		swap(array + start_idx, array + largest);
-		heapify(array, size, largest); /* heapify starting from prev largest node */
+		print_array(array, size0);
+		heapify(array, size, size0, largest); /* starting from prev largest node */
 	}
 }
 
