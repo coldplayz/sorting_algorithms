@@ -45,7 +45,7 @@ void split_sort_merge(int *array, size_t size, int *tmp_arr)
 	/* Recursion base case */
 	if (size == 2)
 	{
-		printf("Merging...\n[Left]: %d\n[Right]: %d\n", array[0], array[1]);
+		printf("Merging...\n[Lleft]: %d\n[right]: %d\n", array[0], array[1]);
 		if (array[0] > array[1])
 			swap_keys(array);
 		printf("[Done]: ");
@@ -70,9 +70,9 @@ void split_sort_merge(int *array, size_t size, int *tmp_arr)
 	}
 
 	/* Sort implementation for sorted sub-arrays */
-	printf("Merging...\n[Left]: ");
+	printf("Merging...\n[left]: ");
 	print_array(left_arr, left_arr_size);
-	printf("[Right]: ");
+	printf("[right]: ");
 	print_array(right_arr, right_arr_size);
 	for (i = 0, j = 0, k = 0;;)
 	{
