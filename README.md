@@ -19,4 +19,6 @@
 
 * 102-counting_sort.c: implements Counting Sort algorithm.
 
+* 103-merge_sort.c: implements the Merge Sort.
+
 
