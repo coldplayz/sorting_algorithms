@@ -21,4 +21,6 @@
 
 * 103-merge_sort.c: implements the Merge Sort.
 
+* 104-heap_sort.c: implements the Heap Sort algorithm.
+
 
