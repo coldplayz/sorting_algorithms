@@ -13,40 +13,31 @@ void insertion_sort_list(listint_t **list)
 	int to_swap, a = 0;
 
 	(void)a;
-	/* printf("Before initial validation\n"); */
 	if (!list || *list == NULL || (*list)->next == NULL)
 	{
 		/* Empty or single-element list */
 		return;
 	}
 
-	/* printf("Before main loop\n"); */
 	next = (*list)->next;
 	while (next)
 	{
-		/* printf("Before comparing values outside\n"); */
 		curr = next;
 		prev = next->prev;
 		if (curr->n < prev->n)
 		{
-			/* printf("Before swap and inside compare loop\n"); */
 			/* Insertion/swapping to occur at some point */
 			to_swap = 1;
 			while (to_swap)
 			{
-				/* printf("In swap/compare loop; before swapping...\n"); */
 				/* Recursively swap and compare until no swapping needs to be done */
 				swap_nodes(list, curr); /* swap node @curr with previous node */
 				print_list(*list);
-				/* printf("...after swapping\n"); */
 				to_swap = compare_nodes(curr); /* check if node @curr needs swapping */
 			}
-			/* printf("After swap/compare loop\n"); */
 		}
-		/* printf("After outside comparison block; before updating next\n\n\n"); */
 		next = next->next; /* always hold address of next node to compare */
 	}
-	/* printf("Before returning from function\n"); */
 }
 
 

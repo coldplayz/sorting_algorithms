@@ -23,4 +23,4 @@
 
 * 104-heap_sort.c: implements the Heap Sort algorithm.
 
-
+* 107-quick_sort_hoare.c: implements Quick Sort using Hoare's partition scheme.
