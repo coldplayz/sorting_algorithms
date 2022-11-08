@@ -43,6 +43,7 @@ void hoare_sort(int *array, size_t size, int *low_a, int *high_a)
 
 	while (left_a != right_a && left_a != right_a + 1)
 	{
+		/* printf("a\n"); */
 		while (1)
 		{
 			if (left_a != pivot_a && *left_a <= *pivot_a)
@@ -68,28 +69,36 @@ void hoare_sort(int *array, size_t size, int *low_a, int *high_a)
 				break;
 			}
 		}
+		/* printf("b\n"); */
 		if (exit_loop)
 		{
+			/* printf("b1\n"); */
 			exit_loop = 0; /* reset flag */
 			break;
 		}
 		if (right_a == pivot_a)
 		{
+			/* printf("b2\n"); */
 			/* Compare pivot_a value with left_a value instead of with right_a value */
 			if (*pivot_a < *left_a)
 			{
+				/* printf("b2i\n"); */
 				swap(pivot_a, left_a); /* swap values */
+				print_array(array, size);
 				pivot_a = left_a; /* reset pivot address to left_a */
 			}
 		}
 		else
 		{
+			/* printf("b3\n"); */
 			/* Compare pivot_a value with right_a value */
 			while (1)
 			{
+				/* printf("b3i\n"); */
 				if (*right_a <= *pivot_a)
 				{
 					swap(pivot_a, right_a); /* swap values */
+					print_array(array, size);
 					if (left_pivot)
 					{
 						/* Reset pivot address to right_a */
@@ -104,27 +113,43 @@ void hoare_sort(int *array, size_t size, int *low_a, int *high_a)
 					exit_loop = 1;
 					break; /* partitioning time */
 				}
+				if (right_a == pivot_a)
+				{
+					if (*pivot_a < *left_a)
+					{
+						swap(pivot_a, left_a);
+						print_array(array, size);
+						pivot_a = left_a;
+					}
+					break;
+				}
 			}
+			/* printf("b4\n"); */
 		}
+		/* printf("c\n"); */
 		if (exit_loop)
 		{
+			/* printf("c1\n"); */
 			exit_loop = 0;
 			break; /* partitioning time */
 		}
 		left_a++, right_a--;
 	}
 
+	/* printf("d\n"); */
 	/* Partition at pivot_a */
 	if (low_a != pivot_a)
 	{
 		/* At least one element to the left of pivot */
 		hoare_sort(array, size, low_a, pivot_a - 1);
 	}
+	/* printf("e\n"); */
 	if (high_a != pivot_a)
 	{
 		/* At least one element to the right of pivot */
 		hoare_sort(array, size, pivot_a + 1, high_a);
 	}
+	/* printf("f\n"); */
 }
 
 
