@@ -1,6 +1,7 @@
 #include "sort.h"
 
 void hoare_sort(int *array, size_t size, int *low_a, int *high_a);
+void shiftIfNot(int **addr, int *cmp_a, char dir);
 
 /**
  * quick_sort_hoare - sorts an array of integers using hoare's quick sort.
@@ -29,7 +30,7 @@ void quick_sort_hoare(int *array, size_t size)
  */
 void hoare_sort(int *array, size_t size, int *low_a, int *high_a)
 {
-	int *left_a, *right_a, *pivot_a, exit_loop = 0, left_pivot = 0;
+	int *left_a, *right_a, *pivot_a, exit_loop = 0, shifted = 0;
 
 	if (low_a == high_a)
 	{
@@ -45,14 +46,13 @@ void hoare_sort(int *array, size_t size, int *low_a, int *high_a)
 	{
 		while (1)
 		{
-			if (left_a != pivot_a && *left_a <= *pivot_a)
+			if (*left_a <= *pivot_a)
 			{
-				/* Value at left_a <= val at pivot_a, and left_a is before pivot_a */
+				/* Value at left_a <= val at pivot_a */
 				left_a++;
 				if (left_a == pivot_a)
 				{
-					/* pivot_a to be reset after value swapping */
-					left_pivot = 1;
+					break; /* left_a will not be updated so long its == pivot_a */
 				}
 			}
 			else
@@ -73,45 +73,106 @@ void hoare_sort(int *array, size_t size, int *low_a, int *high_a)
 			exit_loop = 0; /* reset flag */
 			break;
 		}
-		if (right_a == pivot_a)
+
+		/* Compare pivot_a value with right_a value */
+		while (1)
 		{
-			/* Compare pivot_a value with left_a value instead of with right_a value */
-			if (*pivot_a < *left_a)
+			if (left_a == pivot_a)
 			{
-				swap(pivot_a, left_a); /* swap values */
-				pivot_a = left_a; /* reset pivot address to left_a */
-			}
-		}
-		else
-		{
-			/* Compare pivot_a value with right_a value */
-			while (1)
-			{
-				if (*right_a <= *pivot_a)
+				while (left_a == pivot_a)
 				{
-					swap(pivot_a, right_a); /* swap values */
-					if (left_pivot)
+					/* Compare with right_a value */
+					if (*right_a <= *left_a)
 					{
-						/* Reset pivot address to right_a */
-						pivot_a = right_a;
-						left_pivot = 0; /* reset to default */
+						swap(right_a, left_a); /* swap left==pivot value with right value */
+						print_array(array, size);
+						pivot_a = right_a; /* set pivot address to right_a */
+						shiftIfNot(&left_a, high_a, '+');
+						shifted = 1;
+						break;
 					}
-					break;
+					right_a--;
+					if (left_a == right_a || left_a == right_a + 1)
+					{
+						exit_loop = 1;
+						break; /* partitioning time */
+					}
 				}
-				right_a--; /* move to previous address */
 				if (left_a == right_a || left_a == right_a + 1)
 				{
 					exit_loop = 1;
 					break; /* partitioning time */
 				}
 			}
+			if (exit_loop)
+			{
+				break;
+			}
+
+			if (right_a == pivot_a)
+			{
+				while (right_a == pivot_a)
+				{
+					/* Compare with left_a */
+					if (*left_a > *right_a)
+					{
+						swap(right_a, left_a); /* swap right==pivot value with left value */
+						print_array(array, size);
+						pivot_a = left_a; /* set pivot address to left_a */
+						shiftIfNot(&right_a, low_a, '-');
+						shifted = 1;
+						break;
+					}
+					left_a++;
+					if (left_a == right_a || left_a == right_a + 1)
+					{
+						exit_loop = 1;
+						break; /* partitioning time */
+					}
+				}
+				if (left_a == right_a || left_a == right_a + 1)
+				{
+					exit_loop = 1;
+					break; /* partitioning time */
+				}
+			}
+			if (exit_loop)
+			{
+				break;
+			}
+
+			/* Pivot address not equal to any of left and right addresses */
+			if (right_a != pivot_a && left_a != pivot_a)
+			{
+				if (*right_a <= *pivot_a)
+				{
+					swap(right_a, left_a);
+					print_array(array, size);
+				}
+			}
+
+			if (left_a != pivot_a && !shifted)
+				left_a++;
+			if (right_a != pivot_a && !shifted)
+				right_a--;
+			shifted = 0;
+			if (left_a == right_a || left_a == right_a + 1)
+			{
+				exit_loop = 1;
+				break; /* partitioning time */
+			}
 		}
+
 		if (exit_loop)
 		{
 			exit_loop = 0;
 			break; /* partitioning time */
 		}
-		left_a++, right_a--;
+		if (left_a != pivot_a && !shifted)
+			left_a++;
+		if (right_a != pivot_a && !shifted)
+			right_a--;
+		shifted = 0;
 	}
 
 	/* Partition at pivot_a */
@@ -141,4 +202,28 @@ void swap(int *add1, int *add2)
 	tmp_v = *add1;
 	*add1 = *add2;
 	*add2 = tmp_v;
+}
+
+
+
+/**
+ * shiftIfNot - shifts the 1st address in the direction specified on condition.
+ * @addr: the address of the pointer to potentially shift.
+ * @cmp_a: the address to compare @addr to.
+ * @dir: a char indicating the direction to shift @addr.
+ */
+void shiftIfNot(int **addr, int *cmp_a, char dir)
+{
+	if (*addr != cmp_a)
+	{
+		if (dir == '-')
+		{
+			*addr = *addr - 1;
+		}
+
+		if (dir == '+')
+		{
+			*addr = *addr + 1;
+		}
+	}
 }
